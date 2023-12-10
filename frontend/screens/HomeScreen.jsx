@@ -4,6 +4,8 @@ import {colors, defaultStyle} from '../styles/styles';
 import Header from '../components/Header';
 import {Avatar, Button} from 'react-native-paper';
 import Searchmodal from '../components/Searchmodal';
+import ProductCard from '../components/ProductCard';
+import {useNavigation} from '@react-navigation/native';
 
 const categories = [
   {category: 'Men', _id: '5x23'},
@@ -19,6 +21,7 @@ const products = [
     _id: '2x3fg',
     name: 'ROG Strix G16 (2023) G614',
     price: '2225.88',
+    stock: 23,
     images: [
       {
         url: 'https://m.media-amazon.com/images/I/71lB9KSbbhL._AC_UF894,1000_QL80_.jpg',
@@ -31,10 +34,15 @@ export default function HomeScreen() {
   const [category, setCategory] = useState('');
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigation();
 
   const categoryButtonHandler = id => {
     setCategory(id);
     // console.log(id);
+  };
+
+  const addToCardHandler = id => {
+    console.log(id);
   };
 
   // console.log(activeSearch);
@@ -103,6 +111,26 @@ export default function HomeScreen() {
                   {item.category}{' '}
                 </Text>
               </Button>
+            ))}
+          </ScrollView>
+        </View>
+
+        {/* Products */}
+
+        <View style={{flex: 1}}>
+          <ScrollView showsHorizontalScrollIndicator={false} horizontal>
+            {products.map((item, index) => (
+              <ProductCard
+                stock={item.stock}
+                name={item.name}
+                id={item._id}
+                image={item.images[0]?.url}
+                price={item.price}
+                key={item._id}
+                idx={index}
+                addToCardHandler={addToCardHandler(item._id)}
+                navigate={navigate}
+              />
             ))}
           </ScrollView>
         </View>
