@@ -6,6 +6,7 @@ import {Avatar, Button} from 'react-native-paper';
 import Searchmodal from '../components/Searchmodal';
 import ProductCard from '../components/ProductCard';
 import {useNavigation} from '@react-navigation/native';
+import Footer from '../components/Footer';
 
 const categories = [
   {category: 'Men', _id: '5x23'},
@@ -19,6 +20,18 @@ const categories = [
 const products = [
   {
     _id: '2x3fg',
+    name: 'ROG Strix G16 (2023) G614',
+    price: '2225.88',
+    stock: 23,
+    images: [
+      {
+        url: 'https://m.media-amazon.com/images/I/71lB9KSbbhL._AC_UF894,1000_QL80_.jpg',
+      },
+    ],
+  },
+
+  {
+    _id: '2x3fn',
     name: 'ROG Strix G16 (2023) G614',
     price: '2225.88',
     stock: 23,
@@ -58,7 +71,7 @@ export default function HomeScreen() {
       )}
       <View style={defaultStyle}>
         {/* Header */}
-        <Header back={true} />
+        <Header back={false} />
 
         <View
           style={{
@@ -128,13 +141,15 @@ export default function HomeScreen() {
                 price={item.price}
                 key={item._id}
                 idx={index}
-                addToCardHandler={addToCardHandler(item._id)}
+                addToCardHandler={addToCardHandler}
                 navigate={navigate}
               />
             ))}
           </ScrollView>
         </View>
       </View>
+
+      <Footer activeRoute='Home'/>
     </>
   );
 }
