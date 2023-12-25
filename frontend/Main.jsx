@@ -5,6 +5,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
 import ProductDetails from './screens/ProductDetails';
 import Toast from 'react-native-toast-message';
+import Cart from './screens/Cart';
+import ConfirmOrder from './screens/ConfirmOrder';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +19,8 @@ export default function Main() {
         <Stack.Group>
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="ProductDetails" component={ProductDetails} />
+          <Stack.Screen name="Cart" component={Cart} />
+          <Stack.Screen name='ConfirmOrder' component={ConfirmOrder}/>
         </Stack.Group>
       </Stack.Navigator>
       <Toast position='top'/>
