@@ -7,7 +7,7 @@ import {Button} from 'react-native-paper';
 import CartItems from '../components/CartItems';
 import {useNavigation} from '@react-navigation/native';
 
-const cartItems = [
+export const cartItems = [
   {
     name: 'Rx 300 XZX Typhoon',
     price: '565665',
@@ -53,6 +53,26 @@ const cartItems = [
     price: '365665',
     stock: 9,
     product: '4z245',
+    image:
+      'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTEwL3Jhd3BpeGVsX29mZmljZV8zNl9waG90b19vZl9sYWJ0b3BfaXNvbGF0ZWRfd2hpdGVfYmFja2dyb3VuZF9iYzUxZTI3MC0yZTY0LTQzMDgtYmFlMy1mMzA3NGY5ZTg2ZmUucG5n.png',
+    quantity: 3,
+  },
+
+  {
+    name: 'R2x 900 XZX Typhoon',
+    price: '365665',
+    stock: 9,
+    product: '9uz245',
+    image:
+      'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTEwL3Jhd3BpeGVsX29mZmljZV8zNl9waG90b19vZl9sYWJ0b3BfaXNvbGF0ZWRfd2hpdGVfYmFja2dyb3VuZF9iYzUxZTI3MC0yZTY0LTQzMDgtYmFlMy1mMzA3NGY5ZTg2ZmUucG5n.png',
+    quantity: 3,
+  },
+
+  {
+    name: 'R2x 900 XZX Typhoon',
+    price: '365665',
+    stock: 9,
+    product: 'g3z245',
     image:
       'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTEwL3Jhd3BpeGVsX29mZmljZV8zNl9waG90b19vZl9sYWJ0b3BfaXNvbGF0ZWRfd2hpdGVfYmFja2dyb3VuZF9iYzUxZTI3MC0yZTY0LTQzMDgtYmFlMy1mMzA3NGY5ZTg2ZmUucG5n.png',
     quantity: 3,
