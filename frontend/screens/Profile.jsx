@@ -16,7 +16,30 @@ const loading = false;
 const Profile = ({navigation}) => {
   const [avatar, setAvatar] = React.useState(null);
 
-  const navigateHandler = () => {};
+  const logoutHandler = () => {
+  };
+
+  const navigateHandler = (text) => {
+    switch (text) {
+        case "Admin":
+            navigation.navigate("AdminPanel");
+            break;
+        case "Orders":
+            navigation.navigate("Orders");
+            break;
+        case "Profile":
+            navigation.navigate("UpdateProfile");
+            break;
+        case "Password":
+            navigation.navigate("ChangePassword");
+            break;
+        case "Sign Out":
+            logoutHandler();
+            break;
+        default:
+            break;
+    }
+  };
 
   return (
     <>
