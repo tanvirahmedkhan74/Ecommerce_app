@@ -11,6 +11,8 @@ import Payment from './screens/Payment';
 import Login from './screens/Login';
 import ForgetPassword from './screens/ForgetPassword';
 import Verify from './screens/Verify';
+import SignUp from './screens/SignUp';
+import Profile from './screens/Profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +29,8 @@ export default function Main() {
           <Stack.Screen name="ConfirmOrder" component={ConfirmOrder} />
           <Stack.Screen name="Payment" component={Payment} />
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name='SignUp' component={SignUp} />
+          <Stack.Screen name='Profile' component={Profile}/>
           <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
           <Stack.Screen name="Verify" component={Verify} />
         </Stack.Group>

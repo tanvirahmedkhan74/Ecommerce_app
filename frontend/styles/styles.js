@@ -24,3 +24,6 @@ export const inputStyle = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 20
 })
+
+
+export const defaultHumanUrl = 'https://i.pngimg.me/thumb/f/720/c3f2c592f9.jpg'
