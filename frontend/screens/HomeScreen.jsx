@@ -17,7 +17,7 @@ const categories = [
   {category: 'Relegion', _id: '5x29'},
 ];
 
-const products = [
+export const products = [
   {
     _id: '2x3fg',
     name: 'ROG Strix G16 (2023) G614',
@@ -28,6 +28,7 @@ const products = [
         url: 'https://m.media-amazon.com/images/I/71lB9KSbbhL._AC_UF894,1000_QL80_.jpg',
       },
     ],
+    category: 's578',
   },
 
   {
@@ -40,6 +41,7 @@ const products = [
         url: 'https://m.media-amazon.com/images/I/71lB9KSbbhL._AC_UF894,1000_QL80_.jpg',
       },
     ],
+    category: 'a678',
   },
 ];
 
