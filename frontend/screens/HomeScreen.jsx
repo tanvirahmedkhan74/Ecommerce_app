@@ -19,31 +19,87 @@ const categories = [
 
 export const products = [
   {
-    _id: '2x3fg',
-    name: 'ROG Strix G16 (2023) G614',
-    price: '2225.88',
-    stock: 23,
+    _id: '78h45k',
+    name: 'Apple AirPods Pro with MagSafe Charging Case',
+    price: '249.00',
+    stock: 15,
     images: [
       {
-        url: 'https://m.media-amazon.com/images/I/71lB9KSbbhL._AC_UF894,1000_QL80_.jpg',
+        url: 'https://adminapi.applegadgetsbd.com/storage/media/large/4203-76294.jpg',
+      },
+      {
+        url: 'https://m.media-amazon.com/images/I/71-y54a15IL._AC_UL320_.jpg',
       },
     ],
-    category: 's578',
+    type: 'wireless',
+    noiseCancelling: true,
   },
-
   {
-    _id: '2x3fn',
-    name: 'ROG Strix G16 (2023) G614',
-    price: '2225.88',
-    stock: 23,
+    _id: '34fgg8',
+    name: 'Sony WH-1000XM5 Wireless Noise-Canceling Headphones',
+    price: '398.00',
+    stock: 5,
     images: [
       {
-        url: 'https://m.media-amazon.com/images/I/71lB9KSbbhL._AC_UF894,1000_QL80_.jpg',
+        url: 'https://adminapi.applegadgetsbd.com/storage/media/large/5318-55349.jpg',
+      },
+      {
+        url: 'https://m.media-amazon.com/images/I/61vW98-Y2LL._AC_UL320_.jpg',
       },
     ],
-    category: 'a678',
+    type: 'wireless',
+    noiseCancelling: true,
+  },
+  {
+    _id: '92ih3c',
+    name: 'Sennheiser HD 660S HiFi Over-Ear Headphones',
+    price: '249.99',
+    stock: 18,
+    images: [
+      {
+        url: 'https://m.media-amazon.com/images/W/MEDIAX_792452-T1/images/I/71kC1BXo9PL._AC_UF1000,1000_QL80_.jpg',
+      },
+      {
+        url: 'https://m.media-amazon.com/images/I/613K-aVj05L._AC_UL320_.jpg',
+      },
+    ],
+    type: 'wired',
+    openBack: true,
+  },
+  {
+    _id: '56yh7j',
+    name: 'Jabra Elite 75t True Wireless Earbuds',
+    price: 149.99,
+    stock: 27,
+    images: [
+      {
+        url: 'https://adminapi.applegadgetsbd.com/storage/media/large/2714-11410.jpg',
+      },
+      {
+        url: 'https://m.media-amazon.com/images/I/712rV347wOL._AC_UL320_.jpg',
+      },
+    ],
+    type: 'wireless',
+    waterResistant: true,
+  },
+  {
+    _id: '3k2fg0',
+    name: 'Audio-Technica ATH-M50x Professional Studio Headphones',
+    price: 169.00,
+    stock: 10,
+    images: [
+      {
+        url: 'https://gearsforears.com/cdn/shop/products/M50X-black_1600x.jpg?v=1593138125',
+      },
+      {
+        url: 'https://m.media-amazon.com/images/I/6160q98-QYL._AC_UL320_.jpg',
+      },
+    ],
+    type: 'wired',
+    closedBack: true,
   },
 ];
+
 
 export default function HomeScreen() {
   const [category, setCategory] = useState('');
@@ -151,7 +207,7 @@ export default function HomeScreen() {
         </View>
       </View>
 
-      <Footer activeRoute='Home'/>
+      <Footer activeRoute="Home" />
     </>
   );
 }

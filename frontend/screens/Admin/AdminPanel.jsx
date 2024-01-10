@@ -7,16 +7,29 @@ import ButtonBox from '../../components/ButtonBox';
 import ProductListHeading from '../../components/ProductListHeading';
 import {products} from '../HomeScreen';
 import ProductListItem from '../../components/ProductListItem';
+import Chart from '../../components/Chart';
 
 const AdminPanel = ({navigation}) => {
   const loading = false;
-  const navigationHandler = () => {
-    console.log('Navigation');
+  const navigationHandler = text => {
+    switch (text) {
+      case 'Category':
+        navigation.navigate('Categories');
+        break;
+      case 'All Orders':
+        navigation.navigate('AdminOrders');
+        break;
+      case 'Product':
+        navigation.navigate('NewProduct');
+        break;
+      default:
+        break;
+    }
   };
 
   const deleteProductHandler = id => {
     console.log(id);
-  }
+  };
 
   return (
     <View style={defaultStyle}>
@@ -28,7 +41,9 @@ const AdminPanel = ({navigation}) => {
         <Loader />
       ) : (
         <>
-          <View style={styles.container}></View>
+          <View style={styles.container}>
+            <Chart inStock={34} outOfStock={8} />
+          </View>
 
           <View>
             <View

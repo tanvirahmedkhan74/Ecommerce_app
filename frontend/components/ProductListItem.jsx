@@ -47,11 +47,14 @@ const ProductListItem = ({
         </View>
       </TouchableOpacity>
 
-      {
-        openModal && (
-            <ProductModal/>
-        )
-      }
+      {openModal && (
+        <ProductModal
+          id={id}
+          deleteHandler={deleteHandler}
+          navigation={navigation}
+          setOpenModal={setOpenModal}
+        />
+      )}
     </>
   );
 };
