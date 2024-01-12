@@ -5,7 +5,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {colors, defaultStyle, inputStyle} from '../../styles/styles';
 import Header from '../../components/Header';
 import Loader from '../../components/Loader';
@@ -41,6 +41,15 @@ const NewProduct = ({navigation, route}) => {
   const submitHandler = () => {
     console.log(name, price, description, stock, category, categoryId);
   };
+
+  useEffect(() => {
+    // console.log(route.params);
+    if (route.params) {
+      if (route.params?.photo) {
+        setImage(route.params.photo);
+      }
+    }
+  },[route.params])
 
   return (
     <>

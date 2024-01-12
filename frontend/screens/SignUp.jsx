@@ -22,7 +22,7 @@ const inputOptions = {
   color: colors.color1,
 };
 
-const SignUp = ({navigation}) => {
+const SignUp = ({navigation, route}) => {
   const [email, setEmail] = React.useState('');
   const [name, setName] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -33,12 +33,22 @@ const SignUp = ({navigation}) => {
   const [avatar, setAvatar] = React.useState('');
 
   const loading = false;
-  const disableBtn = !name || !email || !password || !country || !city || !address || !pinCode;
+  const disableBtn =
+    !name || !email || !password || !country || !city || !address || !pinCode;
 
   const submitHandler = () => {
     Alert.alert('Logged In');
     navigation.navigate('Verify');
   };
+
+  React.useEffect(() => {
+    // console.log(route.params);
+    if (route.params) {
+      if (route.params?.photo) {
+        setAvatar(route.params.photo);
+      }
+    }
+  }, [route.params]);
 
   return (
     <>

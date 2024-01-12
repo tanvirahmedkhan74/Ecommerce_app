@@ -6,7 +6,7 @@ import {
   Alert,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   colors,
   defaultHumanUrl,
@@ -23,7 +23,7 @@ const inputOptions = {
   color: colors.color1,
 };
 
-const UpdateProfile = ({navigation}) => {
+const UpdateProfile = ({navigation, route}) => {
   const [email, setEmail] = React.useState('');
   const [name, setName] = React.useState('');
   const [country, setCountry] = React.useState('');
@@ -40,6 +40,15 @@ const UpdateProfile = ({navigation}) => {
     Alert.alert('Logged In');
     navigation.navigate('Verify');
   };
+
+  // useEffect(() => {
+  //   // console.log(route.params);
+  //   if (route.params) {
+  //     if (route.params?.photo) {
+  //       setAvatar(route.params.photo);
+  //     }
+  //   }
+  // },[route.params])
 
   return (
     <>

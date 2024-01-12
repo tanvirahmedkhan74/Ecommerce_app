@@ -9,9 +9,7 @@ import {ActivityIndicator, Avatar} from 'react-native-paper';
 import {launchImageLibrary} from 'react-native-image-picker';
 import Toast from 'react-native-toast-message';
 
-const CameraComponent = ({route}) => {
-  console.log(route.params);
-
+const CameraComponent = ({route, navigation}) => {
   const {hasPermission, requestPermission} = useCameraPermission();
   const [photo, setPhoto] = React.useState(null);
   const [device, setDevice] = useState(useCameraDevice('back'));
@@ -23,14 +21,14 @@ const CameraComponent = ({route}) => {
       const photo = await camera.current.takePhoto({
         qualityPrioritization: 'quality',
       });
-      setPhoto(photo.path);
-      console.log(photo);
+      setPhoto(`file://${photo.path}`);
     }
   };
 
   const pickImage = async () => {
     const result = await launchImageLibrary({
       mediaType: 'photo',
+      allowsEditing: true,
     });
 
     if (result.assets && result.assets[0]) {
@@ -55,10 +53,22 @@ const CameraComponent = ({route}) => {
       {
         type: 'success',
         text1: 'Photo Saved',
-        text2: 'Photo saved to gallery',
       },
       2000,
     );
+    if (route.params?.newProduct) {
+      navigation.navigate('NewProduct', {photo: photo});
+    }
+
+    else if (route.params?.updateProduct) {
+      navigation.navigate('ProductImages', {photo: photo});
+    }
+
+    else if (route.params?.updateProfile) {
+      navigation.navigate('Profile', {photo: photo});
+    }
+
+    else navigation.navigate('SignUp', {photo: photo});
 
     setPhoto(null);
   };
@@ -108,10 +118,7 @@ const CameraComponent = ({route}) => {
         </>
       ) : (
         <View style={{flex: 1}}>
-          <Image
-            source={{uri: `file://${photo}`}}
-            style={StyleSheet.absoluteFill}
-          />
+          <Image source={{uri: photo}} style={StyleSheet.absoluteFill} />
           <View style={styles.container_2}>
             <TouchableOpacity onPress={discardPhoto}>
               <Avatar.Icon

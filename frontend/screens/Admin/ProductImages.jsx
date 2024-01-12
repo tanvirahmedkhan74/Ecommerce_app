@@ -6,7 +6,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {colors, defaultStyle} from '../../styles/styles';
 import Header from '../../components/Header';
 import ImageCard from '../../components/ImageCard';
@@ -21,11 +21,20 @@ const ProductImages = ({route, navigation}) => {
     'https://png.pngtree.com/png-clipart/20200701/original/pngtree-gamebox-5-desigh-with-controller-png-image_5415243.jpg',
   );
 
-  const deleteHandler = (id) => {
+  const deleteHandler = id => {
     console.log(id);
-    console.log(productId)
+    console.log(productId);
   };
   const submitHandler = () => {};
+
+  useEffect(() => {
+    if (route.params) {
+      if (route.params?.photo) {
+        setImage(route.params.photo);
+        setImageChanged(true);
+      }
+    }
+  }, [route.params]);
 
   return (
     <View style={[defaultStyle, {backgroundColor: colors.color5}]}>
@@ -73,8 +82,7 @@ const ProductImages = ({route, navigation}) => {
           textColor={colors.color2}
           loading={loading}
           disabled={!imageChanged}
-          onPress={submitHandler}
-          >
+          onPress={submitHandler}>
           Add Image
         </Button>
       </View>
