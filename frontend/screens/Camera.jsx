@@ -1,16 +1,21 @@
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import React, {useEffect, useRef} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Camera,
   useCameraDevice,
   useCameraPermission,
 } from 'react-native-vision-camera';
 import {ActivityIndicator, Avatar} from 'react-native-paper';
+import {launchImageLibrary} from 'react-native-image-picker';
+import Toast from 'react-native-toast-message';
 
-const CameraComponent = () => {
-  const [photo, setPhoto] = React.useState(null);
+const CameraComponent = ({route}) => {
+  console.log(route.params);
 
   const {hasPermission, requestPermission} = useCameraPermission();
+  const [photo, setPhoto] = React.useState(null);
+  const [device, setDevice] = useState(useCameraDevice('back'));
+
   const camera = useRef(null);
 
   const takePhoto = async () => {
@@ -18,14 +23,44 @@ const CameraComponent = () => {
       const photo = await camera.current.takePhoto({
         qualityPrioritization: 'quality',
       });
-      setPhoto(photo);
+      setPhoto(photo.path);
       console.log(photo);
     }
   };
 
   const pickImage = async () => {
-    const photo = await Camera.openPhotoGallery();
-    setPhoto(photo);
+    const result = await launchImageLibrary({
+      mediaType: 'photo',
+    });
+
+    if (result.assets && result.assets[0]) {
+      setPhoto(result.assets[0].uri);
+    }
+  };
+
+  const flipCamera = async () => {
+    setDevice(prev =>
+      prev === useCameraDevice('front')
+        ? useCameraDevice('back')
+        : useCameraDevice('front'),
+    );
+  };
+
+  const discardPhoto = () => {
+    setPhoto(null);
+  };
+
+  const savePhototoGallery = () => {
+    Toast.show(
+      {
+        type: 'success',
+        text1: 'Photo Saved',
+        text2: 'Photo saved to gallery',
+      },
+      2000,
+    );
+
+    setPhoto(null);
   };
 
   useEffect(() => {
@@ -34,42 +69,72 @@ const CameraComponent = () => {
     }
   });
 
-  const device = useCameraDevice('back');
-
   if (device == null) return <ActivityIndicator />;
   return (
     <View style={{flex: 1}}>
-      <Camera
-        ref={camera}
-        device={device}
-        isActive={true}
-        style={StyleSheet.absoluteFill}
-        photo={true}
-      />
+      {photo === null ? (
+        <>
+          <Camera
+            ref={camera}
+            device={device}
+            isActive={true}
+            style={StyleSheet.absoluteFill}
+            photo={true}
+          />
 
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.snapButton} onPress={pickImage}>
-          <Avatar.Icon
-            size={60}
-            icon="image"
-            style={{backgroundColor: 'black'}}
+          <View style={styles.container}>
+            <TouchableOpacity style={styles.snapButton} onPress={pickImage}>
+              <Avatar.Icon
+                size={60}
+                icon="image"
+                style={{backgroundColor: 'black'}}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.snapButton} onPress={takePhoto}>
+              <Avatar.Icon
+                size={60}
+                icon="camera"
+                style={{backgroundColor: 'black'}}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.snapButton} onPress={flipCamera}>
+              <Avatar.Icon
+                size={60}
+                icon="camera-flip"
+                style={{backgroundColor: 'black'}}
+              />
+            </TouchableOpacity>
+          </View>
+        </>
+      ) : (
+        <View style={{flex: 1}}>
+          <Image
+            source={{uri: `file://${photo}`}}
+            style={StyleSheet.absoluteFill}
           />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.snapButton} onPress={takePhoto}>
-          <Avatar.Icon
-            size={60}
-            icon="camera"
-            style={{backgroundColor: 'black'}}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.snapButton}>
-          <Avatar.Icon
-            size={60}
-            icon="camera-flip"
-            style={{backgroundColor: 'black'}}
-          />
-        </TouchableOpacity>
-      </View>
+          <View style={styles.container_2}>
+            <TouchableOpacity onPress={discardPhoto}>
+              <Avatar.Icon
+                size={60}
+                icon="cancel"
+                style={{
+                  backgroundColor: 'black',
+                }}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={savePhototoGallery}>
+              <Avatar.Icon
+                size={60}
+                icon="check"
+                style={{
+                  backgroundColor: 'red',
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
     </View>
   );
 };
@@ -84,6 +149,14 @@ const styles = StyleSheet.create({
 
   container: {
     top: 860,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 30,
+  },
+
+  container_2: {
+    top: 30,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
