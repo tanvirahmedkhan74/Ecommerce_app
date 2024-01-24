@@ -36,12 +36,17 @@ const CameraComponent = ({route, navigation}) => {
     }
   };
 
-  const flipCamera = async () => {
-    setDevice(prev =>
-      prev === useCameraDevice('front')
-        ? useCameraDevice('back')
-        : useCameraDevice('front'),
-    );
+  const flipCamera = () => {
+    console.log(device);
+    const currentDevice = device.id;
+    const newDevice = currentDevice === 'back' ? 'front' : 'back';
+
+    try {
+      const newCamera = useCameraDevice(newDevice);
+      setDevice(newCamera);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const discardPhoto = () => {
@@ -58,17 +63,11 @@ const CameraComponent = ({route, navigation}) => {
     );
     if (route.params?.newProduct) {
       navigation.navigate('NewProduct', {photo: photo});
-    }
-
-    else if (route.params?.updateProduct) {
+    } else if (route.params?.updateProduct) {
       navigation.navigate('ProductImages', {photo: photo});
-    }
-
-    else if (route.params?.updateProfile) {
+    } else if (route.params?.updateProfile) {
       navigation.navigate('Profile', {photo: photo});
-    }
-
-    else navigation.navigate('SignUp', {photo: photo});
+    } else navigation.navigate('SignUp', {photo: photo});
 
     setPhoto(null);
   };
